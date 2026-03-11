@@ -1,0 +1,15 @@
+Assignment SD 2
+	OTT
+	|
+	|
+	YT
+
+1. Use of manifest five
+2. Use of HCS/DASH
+3. Show how you handle -
+			|
+			|
+			-Likes
+			-Comment
+			don't use--Pub
+				 --Sub
