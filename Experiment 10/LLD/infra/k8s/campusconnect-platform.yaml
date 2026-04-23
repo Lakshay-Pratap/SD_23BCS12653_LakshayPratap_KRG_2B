@@ -1,0 +1,260 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: campusconnect
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: campusconnect-config
+  namespace: campusconnect
+data:
+  API_GATEWAY_PORT: "4000"
+  NEXT_PUBLIC_API_GATEWAY_URL: "https://api.campusconnect.example"
+  AUTH_SERVICE_URL: "http://auth-service:4101"
+  USER_SERVICE_URL: "http://user-service:4102"
+  CHAT_SERVICE_URL: "http://chat-service:4103"
+  MATCHING_SERVICE_URL: "http://matching-service:4104"
+  MODERATION_SERVICE_URL: "http://moderation-service:4105"
+  RECOMMENDATION_SERVICE_URL: "http://recommendation-service:4106"
+  NOTIFICATION_SERVICE_URL: "http://notification-service:4107"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  namespace: campusconnect
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: ghcr.io/your-org/campusconnect-api-gateway:latest
+          ports:
+            - containerPort: 4000
+          envFrom:
+            - configMapRef:
+                name: campusconnect-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway
+  namespace: campusconnect
+spec:
+  selector:
+    app: api-gateway
+  ports:
+    - port: 4000
+      targetPort: 4000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: campusconnect
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: ghcr.io/your-org/campusconnect-web:latest
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: campusconnect-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: campusconnect
+spec:
+  selector:
+    app: web
+  ports:
+    - port: 3000
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  namespace: campusconnect
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      containers:
+        - name: auth-service
+          image: ghcr.io/your-org/campusconnect-auth-service:latest
+          ports:
+            - containerPort: 4101
+          envFrom:
+            - configMapRef:
+                name: campusconnect-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+  namespace: campusconnect
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+        - name: user-service
+          image: ghcr.io/your-org/campusconnect-user-service:latest
+          ports:
+            - containerPort: 4102
+          envFrom:
+            - configMapRef:
+                name: campusconnect-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-service
+  namespace: campusconnect
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: chat-service
+  template:
+    metadata:
+      labels:
+        app: chat-service
+    spec:
+      containers:
+        - name: chat-service
+          image: ghcr.io/your-org/campusconnect-chat-service:latest
+          ports:
+            - containerPort: 4103
+          envFrom:
+            - configMapRef:
+                name: campusconnect-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matching-service
+  namespace: campusconnect
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: matching-service
+  template:
+    metadata:
+      labels:
+        app: matching-service
+    spec:
+      containers:
+        - name: matching-service
+          image: ghcr.io/your-org/campusconnect-matching-service:latest
+          ports:
+            - containerPort: 4104
+          envFrom:
+            - configMapRef:
+                name: campusconnect-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderation-service
+  namespace: campusconnect
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: moderation-service
+  template:
+    metadata:
+      labels:
+        app: moderation-service
+    spec:
+      containers:
+        - name: moderation-service
+          image: ghcr.io/your-org/campusconnect-moderation-service:latest
+          ports:
+            - containerPort: 4105
+          envFrom:
+            - configMapRef:
+                name: campusconnect-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommendation-service
+  namespace: campusconnect
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: recommendation-service
+  template:
+    metadata:
+      labels:
+        app: recommendation-service
+    spec:
+      containers:
+        - name: recommendation-service
+          image: ghcr.io/your-org/campusconnect-recommendation-service:latest
+          ports:
+            - containerPort: 4106
+          envFrom:
+            - configMapRef:
+                name: campusconnect-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-service
+  namespace: campusconnect
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: notification-service
+  template:
+    metadata:
+      labels:
+        app: notification-service
+    spec:
+      containers:
+        - name: notification-service
+          image: ghcr.io/your-org/campusconnect-notification-service:latest
+          ports:
+            - containerPort: 4107
+          envFrom:
+            - configMapRef:
+                name: campusconnect-config

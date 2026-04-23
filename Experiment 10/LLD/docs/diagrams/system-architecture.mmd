@@ -1,0 +1,22 @@
+flowchart LR
+    Web[Next.js Dashboard] --> Gateway[API Gateway]
+    Gateway --> Auth[Auth Service]
+    Gateway --> Users[User Service]
+    Gateway --> Matching[Matching Service]
+    Gateway --> Chat[Chat Service]
+    Gateway --> Moderation[Moderation Service]
+    Gateway --> Recommendation[Recommendation Service]
+    Gateway --> Notification[Notification Service]
+    Users --> Postgres[(PostgreSQL)]
+    Auth --> Postgres
+    Auth --> Chain[Blockchain Identity]
+    Chat --> Mongo[(MongoDB)]
+    Moderation --> Mongo
+    Notification --> Mongo
+    Matching --> Redis[(Redis)]
+    Recommendation --> Redis
+    Chat --> Redis
+    Matching --> Kafka[(Kafka)]
+    Chat --> Kafka
+    Moderation --> Kafka
+    Recommendation --> Kafka

@@ -1,0 +1,29 @@
+{
+  "name": "campusconnect-plus",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "npm@11.8.0",
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "dev:web": "npm run dev --workspace @campusconnect/web",
+    "dev:gateway": "npm run dev --workspace @campusconnect/api-gateway",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down -v"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@types/node": "^22.15.3",
+    "turbo": "^2.0.11",
+    "typescript": "^5.8.3"
+  }
+}

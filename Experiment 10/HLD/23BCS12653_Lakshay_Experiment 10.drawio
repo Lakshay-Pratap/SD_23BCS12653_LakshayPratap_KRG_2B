@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Claude" modified="2024-01-01T00:00:00.000Z" agent="Claude" version="21.0.0">
+  <diagram name="CampusConnect+ HLD" id="campusconnect-hld">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- USERS -->
+        <!-- ═══════════════════════════════════ -->
+        <mxCell id="users" value="Users" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="480" width="100" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- API GATEWAY -->
+        <!-- ═══════════════════════════════════ -->
+        <mxCell id="gateway" value="API Gateway &amp; Load Balancer&#xa;- Auth&#xa;- Routing&#xa;- Rate Limiting" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="200" y="450" width="160" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Users → Gateway -->
+        <mxCell id="e-users-gw" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="users" target="gateway" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- MICROSERVICES (oval/ellipse) -->
+        <!-- ═══════════════════════════════════ -->
+
+        <!-- 1. Auth Service -->
+        <mxCell id="svc-auth" value="Auth Service" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="450" y="100" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- 2. User Service -->
+        <mxCell id="svc-user" value="User Service" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="450" y="240" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- 3. Match &amp; Chat Service -->
+        <mxCell id="svc-match" value="Match &amp; Chat Service" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="450" y="390" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- 4. Feed &amp; Moderation -->
+        <mxCell id="svc-feed" value="Feed &amp; Moderation" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="450" y="540" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- 5. Recommendation Engine -->
+        <mxCell id="svc-rec" value="Recommendation Engine" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="450" y="690" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- 6. Notification Service -->
+        <mxCell id="svc-notif" value="Notification Service" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="450" y="840" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- GATEWAY → SERVICES (numbered) -->
+        <!-- ═══════════════════════════════════ -->
+
+        <mxCell id="e-gw-auth" value="1. Authenticate" style="edgeStyle=orthogonalEdgeStyle;fontSize=11;" edge="1" source="gateway" target="svc-auth" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-gw-user" value="2. User profile" style="edgeStyle=orthogonalEdgeStyle;fontSize=11;" edge="1" source="gateway" target="svc-user" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-gw-match" value="3. Match / Chat" style="edgeStyle=orthogonalEdgeStyle;fontSize=11;" edge="1" source="gateway" target="svc-match" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-gw-feed" value="4. Browse feed" style="edgeStyle=orthogonalEdgeStyle;fontSize=11;" edge="1" source="gateway" target="svc-feed" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-gw-rec" value="5. Recommendations" style="edgeStyle=orthogonalEdgeStyle;fontSize=11;" edge="1" source="gateway" target="svc-rec" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-gw-notif" value="6. Notifications" style="edgeStyle=orthogonalEdgeStyle;fontSize=11;" edge="1" source="gateway" target="svc-notif" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- RIGHT SIDE — DATA STORES -->
+        <!-- ═══════════════════════════════════ -->
+
+        <!-- Auth → JWT/Redis -->
+        <mxCell id="db-jwt" value="Redis Cache&#xa;(Sessions / JWT)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="60" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-auth-jwt" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-auth" target="db-jwt" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Auth → Blockchain -->
+        <mxCell id="db-blockchain" value="Blockchain ID&#xa;(Identity hash)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="140" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-auth-blockchain" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-auth" target="db-blockchain" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- User → PostgreSQL -->
+        <mxCell id="db-postgres" value="PostgreSQL&#xa;(Users · roles · posts)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="220" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-user-pg" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-user" target="db-postgres" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- User → Elasticsearch -->
+        <mxCell id="db-elastic" value="Elasticsearch&#xa;(Search · profiles)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="300" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-user-es" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-user" target="db-elastic" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Match/Chat → Redis Geo -->
+        <mxCell id="db-redis-geo" value="Redis&#xa;(GeoHash · Presence)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="370" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-match-redis" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-match" target="db-redis-geo" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Match/Chat → Kafka -->
+        <mxCell id="db-kafka" value="Kafka Queue&#xa;(Chat · match events)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="450" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-match-kafka" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-match" target="db-kafka" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Match/Chat → MongoDB -->
+        <mxCell id="db-mongo" value="MongoDB&#xa;(Messages · feed)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="530" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-match-mongo" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-match" target="db-mongo" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Feed → AI Moderation -->
+        <mxCell id="db-ai" value="AI Moderation API&#xa;(Toxicity filter)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="610" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-feed-ai" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-feed" target="db-ai" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Feed → Post DB -->
+        <mxCell id="db-postdb" value="Post DB&#xa;(Anon posts · reports)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="690" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-feed-postdb" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-feed" target="db-postdb" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Rec → Rec Store -->
+        <mxCell id="db-rec" value="Rec. Store&#xa;(Collab + content filter)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="770" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-rec-store" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-rec" target="db-rec" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Rec → Analytics -->
+        <mxCell id="db-analytics" value="Analytics DB&#xa;(Activity · A/B tests)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="850" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-rec-analytics" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-rec" target="db-analytics" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Notif → Push Gateway -->
+        <mxCell id="db-push" value="Push Gateway&#xa;(FCM · APNs)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="930" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-notif-push" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-notif" target="db-push" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Notif → Email Service -->
+        <mxCell id="db-email" value="Email Service&#xa;(SendGrid / SES)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="1010" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-notif-email" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="svc-notif" target="db-email" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Kafka → Feed (async event) -->
+        <mxCell id="e-kafka-feed" value="async events" style="edgeStyle=orthogonalEdgeStyle;dashed=1;fontSize=10;" edge="1" source="db-kafka" target="svc-feed" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Kafka → Notif (async event) -->
+        <mxCell id="e-kafka-notif" value="async events" style="edgeStyle=orthogonalEdgeStyle;dashed=1;fontSize=10;" edge="1" source="db-kafka" target="svc-notif" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

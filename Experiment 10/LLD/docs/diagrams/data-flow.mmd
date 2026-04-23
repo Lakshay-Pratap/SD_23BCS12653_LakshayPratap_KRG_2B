@@ -1,0 +1,21 @@
+sequenceDiagram
+    participant UI as Web Client
+    participant GW as API Gateway
+    participant AUTH as Auth Service
+    participant USER as User Service
+    participant MATCH as Matching Service
+    participant REC as Recommendation Service
+    participant CHAT as Chat Service
+    participant MOD as Moderation Service
+
+    UI->>GW: GET /api/dashboard/user-1
+    GW->>USER: Fetch profile + flags
+    GW->>MATCH: Fetch matches
+    GW->>REC: Fetch recommendations
+    GW->>CHAT: Fetch conversations
+    GW->>MOD: Fetch anonymous feed
+    GW-->>UI: Aggregated dashboard payload
+
+    UI->>CHAT: WebSocket room join
+    CHAT-->>UI: message.created
+    CHAT-->>UI: presence.updated

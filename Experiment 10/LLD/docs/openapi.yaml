@@ -1,0 +1,108 @@
+openapi: 3.1.0
+info:
+  title: CampusConnect+ Public API
+  version: 1.0.0
+  description: Gateway-facing REST API for the CampusConnect+ platform.
+servers:
+  - url: http://localhost:4000
+paths:
+  /api/auth/login:
+    post:
+      summary: Login and retrieve access tokens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Authenticated
+  /api/dashboard/{userId}:
+    get:
+      summary: Retrieve the aggregated dashboard payload
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Dashboard payload
+  /api/search:
+    get:
+      summary: Search profiles and posts
+      parameters:
+        - in: query
+          name: q
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Search results
+  /api/architecture:
+    get:
+      summary: Retrieve architecture overview metadata
+      responses:
+        "200":
+          description: Architecture metadata
+  /api/posts/anonymous:
+    post:
+      summary: Create an anonymous post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [body, campus, category, tags]
+              properties:
+                body:
+                  type: string
+                campus:
+                  type: string
+                category:
+                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "200":
+          description: Moderation result
+  /api/chat/messages:
+    post:
+      summary: Send a chat message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [conversationId, senderId, body]
+              properties:
+                conversationId:
+                  type: string
+                senderId:
+                  type: string
+                body:
+                  type: string
+                recipientIds:
+                  type: array
+                  items:
+                    type: string
+                attachments:
+                  type: array
+                  items:
+                    type: object
+      responses:
+        "200":
+          description: Message accepted
